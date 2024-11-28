@@ -22,7 +22,7 @@ export class UserRepository implements UserRepositoryInterface {
     return await this.userRepository.findOne({ where: { id } });
   }
 
-  public async findByEmail(email: string): Promise<UserInterface> {
-    return await this.userRepository.findOne({ where: { email } });
+  public async findByUsername(username: string): Promise<UserInterface> {
+    return await this.userRepository.findOne({ where: { username } });
   }
 }

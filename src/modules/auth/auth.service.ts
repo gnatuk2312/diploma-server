@@ -10,6 +10,8 @@ import { SignInDTO } from './dto/sign-in.dto';
 import { RefreshTokenDTO } from './dto/refresh-token.dto';
 import { TOKEN_SERVICE } from './auth.constants';
 import { TokenService } from './token.service';
+import { UserInterface } from '../user/interface/user.interface';
+import { TokensInterface } from './interface/tokens.interface';
 
 @Injectable()
 export class AuthService implements AuthServiceInterface {
@@ -18,38 +20,40 @@ export class AuthService implements AuthServiceInterface {
     @Inject(TOKEN_SERVICE) private readonly tokenService: TokenService,
   ) {}
 
+  private constructAuthResponse(
+    tokens: TokensInterface,
+    user: UserInterface,
+  ): AuthInterface {
+    return { ...tokens, user };
+  }
+
   public async signUp(dto: SignUpDTO): Promise<AuthInterface> {
-    if (await this.userService.findByEmail(dto.email)) {
-      throw new BadRequestException('Wrong credentials');
+    if (await this.userService.findByUsername(dto.username)) {
+      throw new BadRequestException('This username is already taken');
     }
 
     const user = await this.userService.create(dto);
-    const { accessToken, refreshToken } = this.tokenService.signTokens(user);
 
-    return { accessToken, refreshToken, user };
+    return this.constructAuthResponse(this.tokenService.signTokens(user), user);
   }
 
   public async signIn(dto: SignInDTO): Promise<AuthInterface> {
-    const { email, password } = dto;
+    const { username, password } = dto;
 
-    const user = await this.userService.findByEmail(email);
+    const user = await this.userService.findByUsername(username);
     if (!user) throw new BadRequestException('Wrong credentials');
 
     const isValidPassword = await compare(password, user.password);
     if (!isValidPassword) throw new BadRequestException('Wrong credentials');
 
-    const { accessToken, refreshToken } = this.tokenService.signTokens(user);
-
-    return { accessToken, refreshToken, user };
+    return this.constructAuthResponse(this.tokenService.signTokens(user), user);
   }
 
   public async refreshToken(dto: RefreshTokenDTO): Promise<AuthInterface> {
     const JWTPayload = this.tokenService.verifyRefreshToken(dto.refreshToken);
 
-    const user = await this.userService.findById(String(JWTPayload.id));
+    const user = await this.userService.findById(JWTPayload.userId);
 
-    const { accessToken, refreshToken } = this.tokenService.signTokens(user);
-
-    return { accessToken, refreshToken, user };
+    return this.constructAuthResponse(this.tokenService.signTokens(user), user);
   }
 }

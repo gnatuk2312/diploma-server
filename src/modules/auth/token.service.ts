@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { UserInterface } from '../user/interface/user.interface';
 import { JWTPayloadInterface } from './interface/jwt-payload.interface';
+import { TokensInterface } from './interface/tokens.interface';
 
 // TODO: create a separate module for this logic
 @Injectable()
@@ -20,8 +21,7 @@ export class TokenService {
   }
 
   private createJWTPayload(user: UserInterface): JWTPayloadInterface {
-    const { id, email, firstName, lastName } = user;
-    return { id, email, firstName, lastName };
+    return { userId: user.id };
   }
 
   private signAccessToken(payload: JWTPayloadInterface): string {
@@ -34,15 +34,13 @@ export class TokenService {
   private signRefreshToken(payload: JWTPayloadInterface): string {
     return this.jwtService.sign(payload, {
       secret: this.refreshTokenSecret,
-      expiresIn: '3h',
+      expiresIn: '10d',
     });
   }
 
-  public signTokens(user: UserInterface): {
-    accessToken: string;
-    refreshToken: string;
-  } {
+  public signTokens(user: UserInterface): TokensInterface {
     const payload = this.createJWTPayload(user);
+
     const accessToken = this.signAccessToken(payload);
     const refreshToken = this.signRefreshToken(payload);
 

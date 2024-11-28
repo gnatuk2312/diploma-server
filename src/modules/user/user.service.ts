@@ -23,21 +23,17 @@ export class UserService implements UserServiceInterface {
   ) {}
 
   public async create(dto: CreateUserDTO): Promise<UserInterface> {
-    const isAlreadyExists = await this.userRepository.findByEmail(dto.email);
+    const { username, password, role } = dto;
 
-    if (isAlreadyExists) {
-      throw new BadRequestException('This email is already used');
+    if (await this.userRepository.findByUsername(username)) {
+      throw new BadRequestException('This username is already taken');
     }
-
-    dto.password = await hash(dto.password, this.hashSalt);
 
     const user = new User();
 
-    user.firstName = dto.firstName;
-    user.lastName = dto.lastName;
-    user.email = dto.email;
-    user.phoneNumber = dto.phoneNumber;
-    user.password = dto.password;
+    user.username = username;
+    user.password = await hash(password, this.hashSalt);
+    user.role = role;
 
     return await this.userRepository.create(user);
   }
@@ -54,7 +50,7 @@ export class UserService implements UserServiceInterface {
     return user;
   }
 
-  public async findByEmail(email: string): Promise<UserInterface> {
-    return await this.userRepository.findByEmail(email);
+  public async findByUsername(username: string): Promise<UserInterface> {
+    return await this.userRepository.findByUsername(username);
   }
 }

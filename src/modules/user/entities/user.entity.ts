@@ -7,30 +7,25 @@ import {
 } from 'typeorm';
 
 import { UserInterface } from '../interface/user.interface';
+import { UserRole } from '../user.enums';
 
 @Entity('users')
 export class User implements UserInterface {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @CreateDateColumn({ type: 'timestamptz' })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamptz' })
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
   @Column({ unique: true })
-  email: string;
-
-  @Column()
-  phoneNumber: string;
+  username: string;
 
   @Column()
   password: string;
+
+  @Column({ type: 'enum', enum: UserRole })
+  role: UserRole;
 }
