@@ -5,6 +5,7 @@ import { appConfig, databaseConfig, jwtConfig } from './config';
 import { DatabaseProvider } from './providers';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { LogistDetailsModule } from './modules/logist-details/logist-details.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthModule } from './modules/auth/auth.module';
     DatabaseProvider,
     AuthModule,
     UserModule,
+    LogistDetailsModule,
   ],
 })
 export class AppModule {}
