@@ -6,6 +6,7 @@ import { DatabaseProvider } from './providers';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LogistDetailsModule } from './modules/logist-details/logist-details.module';
+import { DriverDetailsModule } from './modules/driver-details/driver-details.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { LogistDetailsModule } from './modules/logist-details/logist-details.mod
     AuthModule,
     UserModule,
     LogistDetailsModule,
+    DriverDetailsModule,
   ],
 })
 export class AppModule {}
