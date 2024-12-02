@@ -24,3 +24,8 @@ import { VehicleModule } from './modules/vehicle/vehicle.module';
   ],
 })
 export class AppModule {}
+
+// TODO: Remove unnecessary awaits
+// TODO: Remove public properties
+// TODO: Rename all method's prefixes from "find" to "get"
+// TODO: Add null type for nullable entity's column
