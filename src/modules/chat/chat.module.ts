@@ -27,6 +27,6 @@ import { UserModule } from '../user/user.module';
     },
   ],
   controllers: [ChatController],
-  exports: [],
+  exports: [CHAT_SERVICE],
 })
 export class ChatModule {}

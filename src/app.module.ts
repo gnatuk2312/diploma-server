@@ -12,6 +12,7 @@ import { TrailerModule } from './modules/trailer/trailer.module';
 import { VacancyModule } from './modules/vacancy/vacancy.module';
 import { OfferModule } from './modules/offer/offer.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { MessageModule } from './modules/message/message.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { ChatModule } from './modules/chat/chat.module';
     VacancyModule,
     OfferModule,
     ChatModule,
+    MessageModule,
   ],
 })
 export class AppModule {}
