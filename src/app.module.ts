@@ -11,6 +11,7 @@ import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { TrailerModule } from './modules/trailer/trailer.module';
 import { VacancyModule } from './modules/vacancy/vacancy.module';
 import { OfferModule } from './modules/offer/offer.module';
+import { ChatModule } from './modules/chat/chat.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { OfferModule } from './modules/offer/offer.module';
     TrailerModule,
     VacancyModule,
     OfferModule,
+    ChatModule,
   ],
 })
 export class AppModule {}

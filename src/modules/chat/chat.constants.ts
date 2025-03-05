@@ -1,0 +1,2 @@
+export const CHAT_REPOSITORY = 'CHAT_REPOSITORY';
+export const CHAT_SERVICE = 'CHAT_SERVICE';
