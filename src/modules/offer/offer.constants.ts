@@ -1,0 +1,2 @@
+export const OFFER_REPOSITORY = 'OFFER_REPOSITORY';
+export const OFFER_SERVICE = 'OFFER_SERVICE';

@@ -10,6 +10,7 @@ import { DriverDetailsModule } from './modules/driver-details/driver-details.mod
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { TrailerModule } from './modules/trailer/trailer.module';
 import { VacancyModule } from './modules/vacancy/vacancy.module';
+import { OfferModule } from './modules/offer/offer.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { VacancyModule } from './modules/vacancy/vacancy.module';
     VehicleModule,
     TrailerModule,
     VacancyModule,
+    OfferModule,
   ],
 })
 export class AppModule {}

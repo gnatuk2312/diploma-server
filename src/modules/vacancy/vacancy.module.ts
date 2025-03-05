@@ -21,6 +21,6 @@ import { VacancyController } from './vacancy.controller';
     },
   ],
   controllers: [VacancyController],
-  exports: [],
+  exports: [VACANCY_SERVICE],
 })
 export class VacancyModule {}
