@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 import { appConfig, databaseConfig, jwtConfig } from './config';
 import { DatabaseProvider } from './providers';
@@ -13,12 +15,17 @@ import { VacancyModule } from './modules/vacancy/vacancy.module';
 import { OfferModule } from './modules/offer/offer.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { MessageModule } from './modules/message/message.module';
+import { FileModule } from './modules/file/file.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       load: [appConfig, databaseConfig, jwtConfig],
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'public'),
+      serveRoot: '/public',
     }),
     DatabaseProvider,
     AuthModule,
@@ -31,6 +38,7 @@ import { MessageModule } from './modules/message/message.module';
     OfferModule,
     ChatModule,
     MessageModule,
+    FileModule,
   ],
 })
 export class AppModule {}
