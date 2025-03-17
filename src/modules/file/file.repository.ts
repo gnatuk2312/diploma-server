@@ -18,4 +18,8 @@ export class FileRepository implements FileRepositoryInterface {
   getAll(): Promise<FileInterface[]> {
     return this.fileRepository.find();
   }
+
+  getById(id: string): Promise<FileInterface> {
+    return this.fileRepository.findOne({ where: { id } });
+  }
 }

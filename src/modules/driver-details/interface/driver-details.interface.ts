@@ -1,3 +1,4 @@
+import { FileInterface } from 'src/modules/file/interface/file.interface';
 import { UserInterface } from 'src/modules/user/interface/user.interface';
 
 export interface DriverDetailsInterface {
@@ -6,6 +7,5 @@ export interface DriverDetailsInterface {
   description: string | null;
   email: string | null;
   phoneNumber: string | null;
-  //   driverLicense: FileInterface;
-  //   vehicles: VehicleInterface[];
+  driverLicense: FileInterface;
 }

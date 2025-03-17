@@ -10,6 +10,9 @@ import { USER_SERVICE } from '../user/user.constants';
 import { UserServiceInterface } from '../user/interface/user-service.interface';
 import { UserRole } from '../user/user.enums';
 import { DriverDetails } from './entities/driver-details.entity';
+import { FILE_SERVICE } from '../file/file.constants';
+import { FileServiceInterface } from '../file/interface/file-service.interface';
+import { FileInterface } from '../file/interface/file.interface';
 
 export class DriverDetailsService implements DriverDetailsServiceInterface {
   constructor(
@@ -17,12 +20,15 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     private readonly driverDetailsRepository: DriverDetailsRepositoryInterface,
     @Inject(USER_SERVICE)
     private readonly userService: UserServiceInterface,
+    @Inject(FILE_SERVICE)
+    private readonly fileService: FileServiceInterface,
   ) {}
 
   public async create(
     dto: CreateDriverDetailsDTO,
   ): Promise<DriverDetailsInterface> {
-    const { userId, description, email, phoneNumber } = dto;
+    const { userId, description, email, phoneNumber, driverLicenseFileId } =
+      dto;
 
     const user = await this.userService.findById(userId);
 
@@ -39,13 +45,16 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     driverDetails.email = email;
     driverDetails.phoneNumber = phoneNumber;
 
+    driverDetails.driverLicense =
+      await this.getDriverLicenseByFileId(driverLicenseFileId);
+
     return this.driverDetailsRepository.create(driverDetails);
   }
 
   public async update(
     dto: UpdateDriverDetailsDTO,
   ): Promise<DriverDetailsInterface> {
-    const { id, description, email, phoneNumber } = dto;
+    const { id, description, email, phoneNumber, driverLicenseFileId } = dto;
 
     const driverDetails = await this.driverDetailsRepository.findById(id);
 
@@ -56,8 +65,17 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     driverDetails.description = description;
     driverDetails.email = email;
     driverDetails.phoneNumber = phoneNumber;
+    driverDetails.driverLicense =
+      await this.getDriverLicenseByFileId(driverLicenseFileId);
 
     return this.driverDetailsRepository.update(driverDetails);
+  }
+
+  private getDriverLicenseByFileId(
+    fileId: string | undefined,
+  ): Promise<FileInterface> | null {
+    if (!fileId) return null;
+    return this.fileService.getById(fileId);
   }
 
   public findById(id: string): Promise<DriverDetailsInterface> {

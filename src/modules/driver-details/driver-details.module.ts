@@ -10,9 +10,10 @@ import {
 import { DriverDetailsRepository } from './driver-details.repository';
 import { DriverDetailsService } from './driver-details.service';
 import { DriverDetailsController } from './driver-details.controller';
+import { FileModule } from '../file/file.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([DriverDetails]), UserModule],
+  imports: [TypeOrmModule.forFeature([DriverDetails]), UserModule, FileModule],
   providers: [
     {
       provide: DRIVER_DETAILS_REPOSITORY,

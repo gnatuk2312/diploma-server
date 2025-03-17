@@ -26,12 +26,16 @@ export class DriverDetailsRepository
   }
 
   public findById(id: string): Promise<DriverDetailsInterface> {
-    return this.driverDetailsRepository.findOne({ where: { id } });
+    return this.driverDetailsRepository.findOne({
+      where: { id },
+      relations: ['driverLicense'],
+    });
   }
 
   public findByUserId(userId: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findOne({
       where: { user: { id: userId } },
+      relations: ['driverLicense'],
     });
   }
 }

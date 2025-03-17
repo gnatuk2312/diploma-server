@@ -20,6 +20,6 @@ import { File } from './entities/file.entity';
     },
   ],
   controllers: [FileController],
-  exports: [],
+  exports: [FILE_SERVICE],
 })
 export class FileModule {}

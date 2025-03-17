@@ -46,4 +46,8 @@ export class FileService implements FileServiceInterface {
   getAll(): Promise<FileInterface[]> {
     return this.fileRepository.getAll();
   }
+
+  getById(id: string): Promise<FileInterface> {
+    return this.fileRepository.getById(id);
+  }
 }

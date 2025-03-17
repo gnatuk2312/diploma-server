@@ -16,6 +16,7 @@ export class CreateDriverDetailsDTO {
   @IsString()
   phoneNumber: string;
 
-  //   driverLicense: File
-  //   vehicleIds: string[]
+  @IsOptional()
+  @IsUUID('4')
+  driverLicenseFileId?: string;
 }
