@@ -10,6 +10,8 @@ import { UserServiceInterface } from '../user/interface/user-service.interface';
 import { UserRole } from '../user/user.enums';
 import { Vacancy } from './entities/vacancy.entity';
 import { VacancyStatus } from './vacancy.enums';
+import { ADDRESS_SERVICE } from '../address/address.constants';
+import { AddressServiceInterface } from '../address/interface/address-service.interface';
 
 export class VacancyService implements VacancyServiceInterface {
   constructor(
@@ -17,10 +19,12 @@ export class VacancyService implements VacancyServiceInterface {
     private readonly vacancyRepository: VacancyRepositoryInterface,
     @Inject(USER_SERVICE)
     private readonly userService: UserServiceInterface,
+    @Inject(ADDRESS_SERVICE)
+    private readonly addressService: AddressServiceInterface,
   ) {}
 
   async create(dto: CreateVacancyDTO): Promise<VacancyInterface> {
-    const { creatorId, title, description, unitPrice } = dto;
+    const { creatorId, title, description, unitPrice, from, to } = dto;
 
     const creator = await this.userService.findById(creatorId);
 
@@ -41,6 +45,8 @@ export class VacancyService implements VacancyServiceInterface {
     vacancy.title = title;
     vacancy.description = description;
     vacancy.unitPrice = unitPrice;
+    vacancy.from = await this.addressService.create(from);
+    vacancy.to = await this.addressService.create(to);
 
     return this.vacancyRepository.create(vacancy);
   }

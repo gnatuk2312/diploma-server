@@ -16,10 +16,13 @@ export class VacancyRepository implements VacancyRepositoryInterface {
   }
 
   getById(id: string): Promise<VacancyInterface> {
-    return this.vacancyRepository.findOne({ where: { id } });
+    return this.vacancyRepository.findOne({
+      where: { id },
+      relations: ['from', 'to'],
+    });
   }
 
   getAll(): Promise<VacancyInterface[]> {
-    return this.vacancyRepository.find();
+    return this.vacancyRepository.find({ relations: ['from', 'to'] });
   }
 }

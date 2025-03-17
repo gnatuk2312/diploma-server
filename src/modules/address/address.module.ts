@@ -20,6 +20,6 @@ import { Address } from './entities/address.entity';
     },
   ],
   controllers: [AddressController],
-  exports: [],
+  exports: [ADDRESS_SERVICE],
 })
 export class AddressModule {}

@@ -7,9 +7,10 @@ import { VACANCY_REPOSITORY, VACANCY_SERVICE } from './vacancy.constants';
 import { VacancyRepository } from './vacancy.repository';
 import { VacancyService } from './vacancy.service';
 import { VacancyController } from './vacancy.controller';
+import { AddressModule } from '../address/address.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Vacancy]), UserModule],
+  imports: [TypeOrmModule.forFeature([Vacancy]), UserModule, AddressModule],
   providers: [
     {
       provide: VACANCY_REPOSITORY,

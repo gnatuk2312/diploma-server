@@ -3,6 +3,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -10,6 +11,8 @@ import { VacancyStatus } from '../vacancy.enums';
 import { VacancyInterface } from '../interface/vacancy.interface';
 import { User } from 'src/modules/user/entities/user.entity';
 import { UserInterface } from 'src/modules/user/interface/user.interface';
+import { AddressInterface } from 'src/modules/address/interface/address.interface';
+import { Address } from 'src/modules/address/entities/address.entity';
 
 @Entity('vacancies')
 export class Vacancy implements VacancyInterface {
@@ -31,4 +34,12 @@ export class Vacancy implements VacancyInterface {
   @ManyToOne(() => User)
   @JoinColumn()
   creator: UserInterface;
+
+  @OneToOne(() => Address)
+  @JoinColumn()
+  from: AddressInterface;
+
+  @OneToOne(() => Address)
+  @JoinColumn()
+  to: AddressInterface;
 }
