@@ -16,6 +16,7 @@ import { OfferModule } from './modules/offer/offer.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { MessageModule } from './modules/message/message.module';
 import { FileModule } from './modules/file/file.module';
+import { AddressModule } from './modules/address/address.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { FileModule } from './modules/file/file.module';
     ChatModule,
     MessageModule,
     FileModule,
+    AddressModule,
   ],
 })
 export class AppModule {}
