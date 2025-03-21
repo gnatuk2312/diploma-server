@@ -12,7 +12,7 @@ export class Offer implements OfferInterface {
   id: string;
 
   @Column({ nullable: true })
-  comment: string;
+  comment: string | null;
 
   @Column({ type: 'timestamp', nullable: true })
   acceptedAt: Date | null;
