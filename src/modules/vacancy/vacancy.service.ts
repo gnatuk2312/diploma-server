@@ -76,4 +76,72 @@ export class VacancyService implements VacancyServiceInterface {
 
     return this.vacancyRepository.update(vacancy);
   }
+
+  getStatusNew(): Promise<VacancyInterface[]> {
+    return this.vacancyRepository.getByStatus(VacancyStatus.NEW);
+  }
+
+  async getApplied(userId: string): Promise<VacancyInterface[]> {
+    const user = await this.userService.getById(userId);
+
+    if (user.role !== UserRole.DRIVER) {
+      throw new BadRequestException(
+        'You can get applied vacancies only as DRIVER role',
+      );
+    }
+
+    return this.vacancyRepository.getForDriver(userId, VacancyStatus.NEW);
+  }
+
+  async getCreated(userId: string): Promise<VacancyInterface[]> {
+    const user = await this.userService.getById(userId);
+
+    if (user.role !== UserRole.LOGIST) {
+      throw new BadRequestException(
+        'You can get created vacancies only as LOGIST role',
+      );
+    }
+
+    return this.vacancyRepository.getForLogist(userId);
+  }
+
+  async getStatusInProgress(userId: string): Promise<VacancyInterface[]> {
+    const user = await this.userService.getById(userId);
+
+    if (user.role === UserRole.DRIVER) {
+      return this.vacancyRepository.getForDriver(
+        user.id,
+        VacancyStatus.IN_PROGRESS,
+      );
+    }
+
+    if (user.role === UserRole.LOGIST) {
+      return this.vacancyRepository.getForLogist(
+        user.id,
+        VacancyStatus.IN_PROGRESS,
+      );
+    }
+
+    throw new BadRequestException('This role does not exist');
+  }
+
+  async getStatusDelivered(userId: string): Promise<VacancyInterface[]> {
+    const user = await this.userService.getById(userId);
+
+    if (user.role === UserRole.DRIVER) {
+      return this.vacancyRepository.getForDriver(
+        user.id,
+        VacancyStatus.DELIVERED,
+      );
+    }
+
+    if (user.role === UserRole.LOGIST) {
+      return this.vacancyRepository.getForLogist(
+        user.id,
+        VacancyStatus.DELIVERED,
+      );
+    }
+
+    throw new BadRequestException('This role does not exist');
+  }
 }

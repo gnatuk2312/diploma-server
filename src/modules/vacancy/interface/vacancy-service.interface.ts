@@ -7,4 +7,9 @@ export interface VacancyServiceInterface {
   getAll(): Promise<VacancyInterface[]>;
   markAsInProgress(id: string): Promise<VacancyInterface>;
   markAsDelivered(id: string): Promise<VacancyInterface>;
+  getStatusNew(): Promise<VacancyInterface[]>;
+  getApplied(userId: string): Promise<VacancyInterface[]>;
+  getCreated(userId: string): Promise<VacancyInterface[]>;
+  getStatusInProgress(userId: string): Promise<VacancyInterface[]>;
+  getStatusDelivered(userId: string): Promise<VacancyInterface[]>;
 }
