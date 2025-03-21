@@ -22,7 +22,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
   async create(dto: CreateLogistDetailsDTO): Promise<LogistDetailsInterface> {
     const { userId, description, email, phoneNumber } = dto;
 
-    const user = await this.userService.findById(userId);
+    const user = await this.userService.getById(userId);
 
     if (user.role !== UserRole.LOGIST) {
       throw new BadRequestException(
@@ -43,7 +43,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
   async update(dto: UpdateLogistDetailsDTO): Promise<LogistDetailsInterface> {
     const { id, description, email, phoneNumber } = dto;
 
-    const logistDetails = await this.logistDetailsRepository.findById(id);
+    const logistDetails = await this.logistDetailsRepository.getById(id);
 
     if (!logistDetails) {
       throw new NotFoundException('Logist details does not exist');
@@ -56,17 +56,17 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
     return this.logistDetailsRepository.update(logistDetails);
   }
 
-  async findById(id: string): Promise<LogistDetailsInterface> {
-    const logistDetails = await this.logistDetailsRepository.findById(id);
+  async getById(id: string): Promise<LogistDetailsInterface> {
+    const logistDetails = await this.logistDetailsRepository.getById(id);
 
     if (!logistDetails) throw new NotFoundException();
 
     return logistDetails;
   }
 
-  async findByUserId(userId: string): Promise<LogistDetailsInterface> {
+  async getByUserId(userId: string): Promise<LogistDetailsInterface> {
     const logistDetails =
-      await this.logistDetailsRepository.findByUserId(userId);
+      await this.logistDetailsRepository.getByUserId(userId);
 
     if (!logistDetails) throw new NotFoundException();
 

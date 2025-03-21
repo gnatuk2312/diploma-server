@@ -25,7 +25,7 @@ export class UserService implements UserServiceInterface {
   async create(dto: CreateUserDTO): Promise<UserInterface> {
     const { username, password, role } = dto;
 
-    if (await this.userRepository.findByUsername(username)) {
+    if (await this.userRepository.getByUsername(username)) {
       throw new BadRequestException('This username is already taken');
     }
 
@@ -38,19 +38,19 @@ export class UserService implements UserServiceInterface {
     return this.userRepository.create(user);
   }
 
-  findAll(): Promise<UserInterface[]> {
-    return this.userRepository.findAll();
+  getAll(): Promise<UserInterface[]> {
+    return this.userRepository.getAll();
   }
 
-  async findById(id: string): Promise<UserInterface> {
-    const user = await this.userRepository.findById(id);
+  async getById(id: string): Promise<UserInterface> {
+    const user = await this.userRepository.getById(id);
 
     if (!user) throw new NotFoundException();
 
     return user;
   }
 
-  findByUsername(username: string): Promise<UserInterface> {
-    return this.userRepository.findByUsername(username);
+  getByUsername(username: string): Promise<UserInterface> {
+    return this.userRepository.getByUsername(username);
   }
 }

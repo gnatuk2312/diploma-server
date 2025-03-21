@@ -27,7 +27,7 @@ export class MessageService implements MessageServiceInterface {
     const chat = await this.chatService.getById(chatId);
     if (!chat) throw new NotFoundException();
 
-    const creator = await this.userService.findById(creatorId);
+    const creator = await this.userService.getById(creatorId);
     if (!creator) throw new NotFoundException();
 
     const message = new Message();

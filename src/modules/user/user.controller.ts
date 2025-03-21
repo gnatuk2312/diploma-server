@@ -27,12 +27,12 @@ export class UserController {
   }
 
   @Get()
-  findAll(): Promise<UserInterface[]> {
-    return this.userService.findAll();
+  getAll(): Promise<UserInterface[]> {
+    return this.userService.getAll();
   }
 
   @Get('/:id')
-  findById(@Param('id') id: string): Promise<UserInterface> {
-    return this.userService.findById(id);
+  getById(@Param('id') id: string): Promise<UserInterface> {
+    return this.userService.getById(id);
   }
 }

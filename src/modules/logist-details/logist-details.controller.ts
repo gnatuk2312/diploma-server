@@ -35,6 +35,6 @@ export class LogistDetailsController {
   getByUserId(
     @Param('userId') userId: string,
   ): Promise<LogistDetailsInterface> {
-    return this.logistDetailsService.findByUserId(userId);
+    return this.logistDetailsService.getByUserId(userId);
   }
 }

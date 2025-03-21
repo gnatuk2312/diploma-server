@@ -28,7 +28,7 @@ export class AuthService implements AuthServiceInterface {
   }
 
   async signUp(dto: SignUpDTO): Promise<AuthInterface> {
-    if (await this.userService.findByUsername(dto.username)) {
+    if (await this.userService.getByUsername(dto.username)) {
       throw new BadRequestException('This username is already taken');
     }
 
@@ -40,7 +40,7 @@ export class AuthService implements AuthServiceInterface {
   async signIn(dto: SignInDTO): Promise<AuthInterface> {
     const { username, password } = dto;
 
-    const user = await this.userService.findByUsername(username);
+    const user = await this.userService.getByUsername(username);
     if (!user) throw new BadRequestException('Wrong credentials');
 
     const isValidPassword = await compare(password, user.password);
@@ -52,7 +52,7 @@ export class AuthService implements AuthServiceInterface {
   async refreshToken(dto: RefreshTokenDTO): Promise<AuthInterface> {
     const JWTPayload = this.tokenService.verifyRefreshToken(dto.refreshToken);
 
-    const user = await this.userService.findById(JWTPayload.userId);
+    const user = await this.userService.getById(JWTPayload.userId);
 
     return this.constructAuthResponse(this.tokenService.signTokens(user), user);
   }

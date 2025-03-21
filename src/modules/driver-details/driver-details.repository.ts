@@ -21,14 +21,14 @@ export class DriverDetailsRepository
     return this.driverDetailsRepository.save(entity);
   }
 
-  findById(id: string): Promise<DriverDetailsInterface> {
+  getById(id: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findOne({
       where: { id },
       relations: ['driverLicense'],
     });
   }
 
-  findByUserId(userId: string): Promise<DriverDetailsInterface> {
+  getByUserId(userId: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findOne({
       where: { user: { id: userId } },
       relations: ['driverLicense'],

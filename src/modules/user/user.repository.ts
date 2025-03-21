@@ -14,15 +14,15 @@ export class UserRepository implements UserRepositoryInterface {
     return this.userRepository.save(entity);
   }
 
-  findAll(): Promise<UserInterface[]> {
+  getAll(): Promise<UserInterface[]> {
     return this.userRepository.find();
   }
 
-  findById(id: string): Promise<UserInterface> {
+  getById(id: string): Promise<UserInterface> {
     return this.userRepository.findOne({ where: { id } });
   }
 
-  findByUsername(username: string): Promise<UserInterface> {
+  getByUsername(username: string): Promise<UserInterface> {
     return this.userRepository.findOne({ where: { username } });
   }
 }

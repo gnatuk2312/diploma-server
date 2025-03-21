@@ -32,11 +32,11 @@ export class VehicleController {
 
   @Get(':id')
   getById(@Param('id') id: string): Promise<VehicleInterface> {
-    return this.vehicleService.findById(id);
+    return this.vehicleService.getById(id);
   }
 
   @Get('user/:userId')
   getAllByUserId(@Param('userId') userId: string): Promise<VehicleInterface[]> {
-    return this.vehicleService.findAllByUserId(userId);
+    return this.vehicleService.getAllByUserId(userId);
   }
 }

@@ -35,6 +35,6 @@ export class DriverDetailsController {
   getByUserId(
     @Param('userId') userId: string,
   ): Promise<DriverDetailsInterface> {
-    return this.driverDetailsService.findByUserId(userId);
+    return this.driverDetailsService.getByUserId(userId);
   }
 }

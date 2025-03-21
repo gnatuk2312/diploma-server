@@ -26,7 +26,7 @@ export class VacancyService implements VacancyServiceInterface {
   async create(dto: CreateVacancyDTO): Promise<VacancyInterface> {
     const { creatorId, title, description, unitPrice, from, to } = dto;
 
-    const creator = await this.userService.findById(creatorId);
+    const creator = await this.userService.getById(creatorId);
 
     if (!creator) {
       throw new NotFoundException('Creator not found');

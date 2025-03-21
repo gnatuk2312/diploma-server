@@ -19,14 +19,14 @@ export class VehicleRepository implements VehicleRepositoryInterface {
     return this.vehicleRepository.save(entity);
   }
 
-  findById(id: string): Promise<VehicleInterface> {
+  getById(id: string): Promise<VehicleInterface> {
     return this.vehicleRepository.findOne({
       where: { id },
       relations: ['registration'],
     });
   }
 
-  findAllByUserId(userId: string): Promise<VehicleInterface[]> {
+  getAllByUserId(userId: string): Promise<VehicleInterface[]> {
     return this.vehicleRepository.find({
       where: { driver: { id: userId } },
       relations: ['registration'],

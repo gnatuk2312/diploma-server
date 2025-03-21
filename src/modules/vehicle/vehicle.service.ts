@@ -27,7 +27,7 @@ export class VehicleService implements VehicleServiceInterface {
   async create(dto: CreateVehicleDTO): Promise<VehicleInterface> {
     const { driverId, registrationFileId, brand, model, kilometrage } = dto;
 
-    const user = await this.userService.findById(driverId);
+    const user = await this.userService.getById(driverId);
 
     if (user.role !== UserRole.DRIVER) {
       throw new BadRequestException(
@@ -50,7 +50,7 @@ export class VehicleService implements VehicleServiceInterface {
   async update(dto: UpdateVehicleDTO): Promise<VehicleInterface> {
     const { id, registrationFileId, brand, model, kilometrage } = dto;
 
-    const vehicle = await this.vehicleRepository.findById(id);
+    const vehicle = await this.vehicleRepository.getById(id);
 
     if (!vehicle) throw new NotFoundException();
 
@@ -70,11 +70,11 @@ export class VehicleService implements VehicleServiceInterface {
     return this.fileService.getById(fileId);
   }
 
-  findById(id: string): Promise<VehicleInterface> {
-    return this.vehicleRepository.findById(id);
+  getById(id: string): Promise<VehicleInterface> {
+    return this.vehicleRepository.getById(id);
   }
 
-  findAllByUserId(userId: string): Promise<VehicleInterface[]> {
-    return this.vehicleRepository.findAllByUserId(userId);
+  getAllByUserId(userId: string): Promise<VehicleInterface[]> {
+    return this.vehicleRepository.getAllByUserId(userId);
   }
 }

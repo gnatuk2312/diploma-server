@@ -24,7 +24,7 @@ export class OfferService implements OfferServiceInterface {
   async create(dto: CreateOfferDTO): Promise<OfferInterface> {
     const { creatorId, vacancyId, comment } = dto;
 
-    const creator = await this.userService.findById(creatorId);
+    const creator = await this.userService.getById(creatorId);
     if (!creator) throw new BadRequestException('User does not exist');
 
     const vacancy = await this.vacancyService.getById(vacancyId);

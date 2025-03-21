@@ -5,6 +5,6 @@ import { UpdateLogistDetailsDTO } from '../dto/update-logist-details.dto';
 export interface LogistDetailsServiceInterface {
   create(dto: CreateLogistDetailsDTO): Promise<LogistDetailsInterface>;
   update(dto: UpdateLogistDetailsDTO): Promise<LogistDetailsInterface>;
-  findById(id: string): Promise<LogistDetailsInterface>;
-  findByUserId(userId: string): Promise<LogistDetailsInterface>;
+  getById(id: string): Promise<LogistDetailsInterface>;
+  getByUserId(userId: string): Promise<LogistDetailsInterface>;
 }

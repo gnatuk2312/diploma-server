@@ -28,7 +28,7 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     const { userId, description, email, phoneNumber, driverLicenseFileId } =
       dto;
 
-    const user = await this.userService.findById(userId);
+    const user = await this.userService.getById(userId);
 
     if (user.role !== UserRole.DRIVER) {
       throw new BadRequestException(
@@ -52,7 +52,7 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
   async update(dto: UpdateDriverDetailsDTO): Promise<DriverDetailsInterface> {
     const { id, description, email, phoneNumber, driverLicenseFileId } = dto;
 
-    const driverDetails = await this.driverDetailsRepository.findById(id);
+    const driverDetails = await this.driverDetailsRepository.getById(id);
 
     if (!driverDetails) {
       throw new NotFoundException('Driver details does not exist');
@@ -74,11 +74,11 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     return this.fileService.getById(fileId);
   }
 
-  findById(id: string): Promise<DriverDetailsInterface> {
-    return this.driverDetailsRepository.findById(id);
+  getById(id: string): Promise<DriverDetailsInterface> {
+    return this.driverDetailsRepository.getById(id);
   }
 
-  findByUserId(userId: string): Promise<DriverDetailsInterface> {
-    return this.driverDetailsRepository.findByUserId(userId);
+  getByUserId(userId: string): Promise<DriverDetailsInterface> {
+    return this.driverDetailsRepository.getByUserId(userId);
   }
 }

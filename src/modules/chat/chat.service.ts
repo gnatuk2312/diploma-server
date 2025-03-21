@@ -45,7 +45,7 @@ export class ChatService implements ChatServiceInterface {
   ): Promise<ChatParticipantInterface[]> {
     return Promise.all(
       participantIds.map(async (participantId) => {
-        const user = await this.userService.findById(participantId);
+        const user = await this.userService.getById(participantId);
         if (!user) throw new NotFoundException();
 
         const chatParticipant = new ChatParticipant();

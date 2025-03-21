@@ -34,7 +34,7 @@ export class TrailerService implements TrailerServiceInterface {
       loadCapacity,
     } = dto;
 
-    const vehicle = await this.vehicleService.findById(vehicleId);
+    const vehicle = await this.vehicleService.getById(vehicleId);
 
     if (!vehicle) {
       throw new NotFoundException('Vehicle with this id does not exists');

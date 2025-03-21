@@ -21,11 +21,11 @@ export class LogistDetailsRepository
     return this.logistDetailsRepository.save(entity);
   }
 
-  findById(id: string): Promise<LogistDetailsInterface> {
+  getById(id: string): Promise<LogistDetailsInterface> {
     return this.logistDetailsRepository.findOne({ where: { id } });
   }
 
-  findByUserId(userId: string): Promise<LogistDetailsInterface> {
+  getByUserId(userId: string): Promise<LogistDetailsInterface> {
     return this.logistDetailsRepository.findOne({
       where: { user: { id: userId } },
     });
