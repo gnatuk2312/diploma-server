@@ -10,6 +10,9 @@ import { USER_SERVICE } from '../user/user.constants';
 import { UserServiceInterface } from '../user/interface/user-service.interface';
 import { UserRole } from '../user/user.enums';
 import { Vehicle } from './entities/vehicle.entity';
+import { FILE_SERVICE } from '../file/file.constants';
+import { FileService } from '../file/file.service';
+import { FileInterface } from '../file/interface/file.interface';
 
 export class VehicleService implements VehicleServiceInterface {
   constructor(
@@ -17,10 +20,12 @@ export class VehicleService implements VehicleServiceInterface {
     private readonly vehicleRepository: VehicleRepositoryInterface,
     @Inject(USER_SERVICE)
     private readonly userService: UserServiceInterface,
+    @Inject(FILE_SERVICE)
+    private readonly fileService: FileService,
   ) {}
 
   public async create(dto: CreateVehicleDTO): Promise<VehicleInterface> {
-    const { driverId, brand, model, kilometrage } = dto;
+    const { driverId, registrationFileId, brand, model, kilometrage } = dto;
 
     const user = await this.userService.findById(driverId);
 
@@ -33,6 +38,8 @@ export class VehicleService implements VehicleServiceInterface {
     const vehicle = new Vehicle();
 
     vehicle.driver = user;
+    vehicle.registration =
+      await this.getRegistrationByFileId(registrationFileId);
     vehicle.brand = brand;
     vehicle.model = model;
     vehicle.kilometrage = kilometrage;
@@ -41,17 +48,26 @@ export class VehicleService implements VehicleServiceInterface {
   }
 
   public async update(dto: UpdateVehicleDTO): Promise<VehicleInterface> {
-    const { id, brand, model, kilometrage } = dto;
+    const { id, registrationFileId, brand, model, kilometrage } = dto;
 
     const vehicle = await this.vehicleRepository.findById(id);
 
     if (!vehicle) throw new NotFoundException();
 
+    vehicle.registration =
+      await this.getRegistrationByFileId(registrationFileId);
     vehicle.brand = brand;
     vehicle.model = model;
     vehicle.kilometrage = kilometrage;
 
     return this.vehicleRepository.update(vehicle);
+  }
+
+  private getRegistrationByFileId(
+    fileId: string | undefined,
+  ): Promise<FileInterface> | null {
+    if (!fileId) return null;
+    return this.fileService.getById(fileId);
   }
 
   public findById(id: string): Promise<VehicleInterface> {

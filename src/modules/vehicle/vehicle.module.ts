@@ -7,9 +7,10 @@ import { VEHICLE_REPOSITORY, VEHICLE_SERVICE } from './vehicle.constants';
 import { VehicleRepository } from './vehicle.repository';
 import { VehicleService } from './vehicle.service';
 import { VehicleController } from './vehicle.controller';
+import { FileModule } from '../file/file.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Vehicle]), UserModule],
+  imports: [TypeOrmModule.forFeature([Vehicle]), UserModule, FileModule],
   providers: [
     {
       provide: VEHICLE_REPOSITORY,

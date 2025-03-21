@@ -5,6 +5,10 @@ export class UpdateVehicleDTO {
   id: string;
 
   @IsOptional()
+  @IsUUID('4')
+  registrationFileId: string;
+
+  @IsOptional()
   @IsString()
   brand: string;
 

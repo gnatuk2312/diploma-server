@@ -20,10 +20,16 @@ export class VehicleRepository implements VehicleRepositoryInterface {
   }
 
   public findById(id: string): Promise<VehicleInterface> {
-    return this.vehicleRepository.findOne({ where: { id } });
+    return this.vehicleRepository.findOne({
+      where: { id },
+      relations: ['registration'],
+    });
   }
 
   public findAllByUserId(userId: string): Promise<VehicleInterface[]> {
-    return this.vehicleRepository.find({ where: { driver: { id: userId } } });
+    return this.vehicleRepository.find({
+      where: { driver: { id: userId } },
+      relations: ['registration'],
+    });
   }
 }

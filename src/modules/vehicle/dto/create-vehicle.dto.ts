@@ -4,6 +4,9 @@ export class CreateVehicleDTO {
   @IsUUID('4')
   driverId: string;
 
+  @IsUUID('4')
+  registrationFileId: string;
+
   @IsString()
   brand: string;
 
