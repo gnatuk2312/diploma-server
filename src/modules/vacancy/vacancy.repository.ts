@@ -15,6 +15,10 @@ export class VacancyRepository implements VacancyRepositoryInterface {
     return this.vacancyRepository.save(entity);
   }
 
+  update(entity: VacancyInterface): Promise<VacancyInterface> {
+    return this.vacancyRepository.save(entity);
+  }
+
   getById(id: string): Promise<VacancyInterface> {
     return this.vacancyRepository.findOne({
       where: { id },

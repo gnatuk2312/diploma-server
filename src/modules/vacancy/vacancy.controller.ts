@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 import { VACANCY_SERVICE } from './vacancy.constants';
 import { VacancyServiceInterface } from './interface/vacancy-service.interface';
@@ -25,5 +33,15 @@ export class VacancyController {
   @Get()
   getAll(): Promise<VacancyInterface[]> {
     return this.vacancyService.getAll();
+  }
+
+  @Patch(':id/in-progress')
+  markAsInProgress(@Param('id') id: string): Promise<VacancyInterface> {
+    return this.vacancyService.markAsInProgress(id);
+  }
+
+  @Patch(':id/delivered')
+  markAsDelivered(@Param('id') id: string): Promise<VacancyInterface> {
+    return this.vacancyService.markAsDelivered(id);
   }
 }

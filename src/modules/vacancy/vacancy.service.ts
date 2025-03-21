@@ -58,4 +58,22 @@ export class VacancyService implements VacancyServiceInterface {
   getAll(): Promise<VacancyInterface[]> {
     return this.vacancyRepository.getAll();
   }
+
+  async markAsInProgress(id: string): Promise<VacancyInterface> {
+    const vacancy = await this.vacancyRepository.getById(id);
+    if (!vacancy) throw new NotFoundException();
+
+    vacancy.status = VacancyStatus.IN_PROGRESS;
+
+    return this.vacancyRepository.update(vacancy);
+  }
+
+  async markAsDelivered(id: string): Promise<VacancyInterface> {
+    const vacancy = await this.vacancyRepository.getById(id);
+    if (!vacancy) throw new NotFoundException();
+
+    vacancy.status = VacancyStatus.DELIVERED;
+
+    return this.vacancyRepository.update(vacancy);
+  }
 }

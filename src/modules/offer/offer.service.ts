@@ -53,7 +53,7 @@ export class OfferService implements OfferServiceInterface {
 
     offer.acceptedAt = new Date();
 
-    // TODO: update vacancy status
+    await this.vacancyService.markAsInProgress(offer.vacancy.id);
 
     return this.offerRepository.update(offer);
   }
