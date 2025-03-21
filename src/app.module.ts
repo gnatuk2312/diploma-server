@@ -44,5 +44,3 @@ import { AddressModule } from './modules/address/address.module';
   ],
 })
 export class AppModule {}
-
-// TODO: Add null type for nullable entity's column

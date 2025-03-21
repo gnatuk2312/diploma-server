@@ -38,5 +38,5 @@ export class Trailer implements TrailerInterface {
 
   @OneToOne(() => File)
   @JoinColumn()
-  registration: FileInterface;
+  registration: FileInterface | null;
 }

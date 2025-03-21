@@ -7,5 +7,5 @@ export interface DriverDetailsInterface {
   description: string | null;
   email: string | null;
   phoneNumber: string | null;
-  driverLicense: FileInterface;
+  driverLicense: FileInterface | null;
 }

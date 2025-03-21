@@ -7,7 +7,7 @@ export interface VacancyInterface {
   creator: UserInterface;
   status: VacancyStatus;
   title: string;
-  description?: string;
+  description: string | null;
   unitPrice: number;
   from: AddressInterface;
   to: AddressInterface;

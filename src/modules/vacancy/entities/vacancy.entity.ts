@@ -26,7 +26,7 @@ export class Vacancy implements VacancyInterface {
   title: string;
 
   @Column({ nullable: true })
-  description?: string;
+  description: string | null;
 
   @Column({ type: 'int' })
   unitPrice: number;

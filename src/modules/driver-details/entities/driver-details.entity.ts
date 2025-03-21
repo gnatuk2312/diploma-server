@@ -18,13 +18,13 @@ export class DriverDetails implements DriverDetailsInterface {
   id: string;
 
   @Column({ nullable: true })
-  description: string;
+  description: string | null;
 
   @Column({ nullable: true })
-  email: string;
+  email: string | null;
 
   @Column({ nullable: true })
-  phoneNumber: string;
+  phoneNumber: string | null;
 
   @OneToOne(() => User)
   @JoinColumn()
@@ -32,5 +32,5 @@ export class DriverDetails implements DriverDetailsInterface {
 
   @OneToOne(() => File)
   @JoinColumn()
-  driverLicense: FileInterface;
+  driverLicense: FileInterface | null;
 }
