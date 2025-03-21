@@ -24,9 +24,7 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     private readonly fileService: FileServiceInterface,
   ) {}
 
-  public async create(
-    dto: CreateDriverDetailsDTO,
-  ): Promise<DriverDetailsInterface> {
+  async create(dto: CreateDriverDetailsDTO): Promise<DriverDetailsInterface> {
     const { userId, description, email, phoneNumber, driverLicenseFileId } =
       dto;
 
@@ -51,9 +49,7 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     return this.driverDetailsRepository.create(driverDetails);
   }
 
-  public async update(
-    dto: UpdateDriverDetailsDTO,
-  ): Promise<DriverDetailsInterface> {
+  async update(dto: UpdateDriverDetailsDTO): Promise<DriverDetailsInterface> {
     const { id, description, email, phoneNumber, driverLicenseFileId } = dto;
 
     const driverDetails = await this.driverDetailsRepository.findById(id);
@@ -78,11 +74,11 @@ export class DriverDetailsService implements DriverDetailsServiceInterface {
     return this.fileService.getById(fileId);
   }
 
-  public findById(id: string): Promise<DriverDetailsInterface> {
+  findById(id: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findById(id);
   }
 
-  public findByUserId(userId: string): Promise<DriverDetailsInterface> {
+  findByUserId(userId: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findByUserId(userId);
   }
 }

@@ -11,22 +11,22 @@ export class VehicleRepository implements VehicleRepositoryInterface {
     private readonly vehicleRepository: Repository<Vehicle>,
   ) {}
 
-  public create(entity: VehicleInterface): Promise<VehicleInterface> {
+  create(entity: VehicleInterface): Promise<VehicleInterface> {
     return this.vehicleRepository.save(entity);
   }
 
-  public update(entity: VehicleInterface): Promise<VehicleInterface> {
+  update(entity: VehicleInterface): Promise<VehicleInterface> {
     return this.vehicleRepository.save(entity);
   }
 
-  public findById(id: string): Promise<VehicleInterface> {
+  findById(id: string): Promise<VehicleInterface> {
     return this.vehicleRepository.findOne({
       where: { id },
       relations: ['registration'],
     });
   }
 
-  public findAllByUserId(userId: string): Promise<VehicleInterface[]> {
+  findAllByUserId(userId: string): Promise<VehicleInterface[]> {
     return this.vehicleRepository.find({
       where: { driver: { id: userId } },
       relations: ['registration'],

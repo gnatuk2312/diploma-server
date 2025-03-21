@@ -45,6 +45,5 @@ import { AddressModule } from './modules/address/address.module';
 })
 export class AppModule {}
 
-// TODO: Remove public properties
 // TODO: Rename all method's prefixes from "find" to "get"
 // TODO: Add null type for nullable entity's column

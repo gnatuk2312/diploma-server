@@ -22,21 +22,17 @@ export class DriverDetailsController {
   ) {}
 
   @Post()
-  public create(
-    @Body() dto: CreateDriverDetailsDTO,
-  ): Promise<DriverDetailsInterface> {
+  create(@Body() dto: CreateDriverDetailsDTO): Promise<DriverDetailsInterface> {
     return this.driverDetailsService.create(dto);
   }
 
   @Put()
-  public update(
-    @Body() dto: UpdateDriverDetailsDTO,
-  ): Promise<DriverDetailsInterface> {
+  update(@Body() dto: UpdateDriverDetailsDTO): Promise<DriverDetailsInterface> {
     return this.driverDetailsService.update(dto);
   }
 
   @Get('user/:userId')
-  public getByUserId(
+  getByUserId(
     @Param('userId') userId: string,
   ): Promise<DriverDetailsInterface> {
     return this.driverDetailsService.findByUserId(userId);

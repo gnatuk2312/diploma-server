@@ -38,7 +38,7 @@ export class TokenService {
     });
   }
 
-  public signTokens(user: UserInterface): TokensInterface {
+  signTokens(user: UserInterface): TokensInterface {
     const payload = this.createJWTPayload(user);
 
     const accessToken = this.signAccessToken(payload);
@@ -47,7 +47,7 @@ export class TokenService {
     return { accessToken, refreshToken };
   }
 
-  public verifyRefreshToken(token: string): JWTPayloadInterface {
+  verifyRefreshToken(token: string): JWTPayloadInterface {
     try {
       return this.jwtService.verify(token, { secret: this.refreshTokenSecret });
     } catch (error) {

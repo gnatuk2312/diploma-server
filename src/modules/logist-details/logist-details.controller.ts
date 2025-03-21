@@ -22,21 +22,17 @@ export class LogistDetailsController {
   ) {}
 
   @Post()
-  public create(
-    @Body() dto: CreateLogistDetailsDTO,
-  ): Promise<LogistDetailsInterface> {
+  create(@Body() dto: CreateLogistDetailsDTO): Promise<LogistDetailsInterface> {
     return this.logistDetailsService.create(dto);
   }
 
   @Put()
-  public update(
-    @Body() dto: UpdateLogistDetailsDTO,
-  ): Promise<LogistDetailsInterface> {
+  update(@Body() dto: UpdateLogistDetailsDTO): Promise<LogistDetailsInterface> {
     return this.logistDetailsService.update(dto);
   }
 
   @Get('user/:userId')
-  public getByUserId(
+  getByUserId(
     @Param('userId') userId: string,
   ): Promise<LogistDetailsInterface> {
     return this.logistDetailsService.findByUserId(userId);

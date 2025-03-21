@@ -14,17 +14,17 @@ export class AuthController {
   ) {}
 
   @Post('/sign-up')
-  public signUp(@Body() dto: SignUpDTO): Promise<AuthInterface> {
+  signUp(@Body() dto: SignUpDTO): Promise<AuthInterface> {
     return this.authService.signUp(dto);
   }
 
   @Post('/sign-in')
-  public signIn(@Body() dto: SignInDTO): Promise<AuthInterface> {
+  signIn(@Body() dto: SignInDTO): Promise<AuthInterface> {
     return this.authService.signIn(dto);
   }
 
   @Post('/refresh-token')
-  public refreshToken(@Body() dto: RefreshTokenDTO): Promise<AuthInterface> {
+  refreshToken(@Body() dto: RefreshTokenDTO): Promise<AuthInterface> {
     return this.authService.refreshToken(dto);
   }
 }

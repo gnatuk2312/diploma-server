@@ -13,26 +13,22 @@ export class DriverDetailsRepository
     private readonly driverDetailsRepository: Repository<DriverDetails>,
   ) {}
 
-  public create(
-    entity: DriverDetailsInterface,
-  ): Promise<DriverDetailsInterface> {
+  create(entity: DriverDetailsInterface): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.save(entity);
   }
 
-  public update(
-    entity: DriverDetailsInterface,
-  ): Promise<DriverDetailsInterface> {
+  update(entity: DriverDetailsInterface): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.save(entity);
   }
 
-  public findById(id: string): Promise<DriverDetailsInterface> {
+  findById(id: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findOne({
       where: { id },
       relations: ['driverLicense'],
     });
   }
 
-  public findByUserId(userId: string): Promise<DriverDetailsInterface> {
+  findByUserId(userId: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findOne({
       where: { user: { id: userId } },
       relations: ['driverLicense'],

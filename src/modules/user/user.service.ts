@@ -22,7 +22,7 @@ export class UserService implements UserServiceInterface {
     private readonly userRepository: UserRepositoryInterface,
   ) {}
 
-  public async create(dto: CreateUserDTO): Promise<UserInterface> {
+  async create(dto: CreateUserDTO): Promise<UserInterface> {
     const { username, password, role } = dto;
 
     if (await this.userRepository.findByUsername(username)) {
@@ -38,11 +38,11 @@ export class UserService implements UserServiceInterface {
     return this.userRepository.create(user);
   }
 
-  public findAll(): Promise<UserInterface[]> {
+  findAll(): Promise<UserInterface[]> {
     return this.userRepository.findAll();
   }
 
-  public async findById(id: string): Promise<UserInterface> {
+  async findById(id: string): Promise<UserInterface> {
     const user = await this.userRepository.findById(id);
 
     if (!user) throw new NotFoundException();
@@ -50,7 +50,7 @@ export class UserService implements UserServiceInterface {
     return user;
   }
 
-  public findByUsername(username: string): Promise<UserInterface> {
+  findByUsername(username: string): Promise<UserInterface> {
     return this.userRepository.findByUsername(username);
   }
 }

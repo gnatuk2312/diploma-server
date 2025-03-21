@@ -24,7 +24,7 @@ export class VehicleService implements VehicleServiceInterface {
     private readonly fileService: FileService,
   ) {}
 
-  public async create(dto: CreateVehicleDTO): Promise<VehicleInterface> {
+  async create(dto: CreateVehicleDTO): Promise<VehicleInterface> {
     const { driverId, registrationFileId, brand, model, kilometrage } = dto;
 
     const user = await this.userService.findById(driverId);
@@ -47,7 +47,7 @@ export class VehicleService implements VehicleServiceInterface {
     return this.vehicleRepository.create(vehicle);
   }
 
-  public async update(dto: UpdateVehicleDTO): Promise<VehicleInterface> {
+  async update(dto: UpdateVehicleDTO): Promise<VehicleInterface> {
     const { id, registrationFileId, brand, model, kilometrage } = dto;
 
     const vehicle = await this.vehicleRepository.findById(id);
@@ -70,11 +70,11 @@ export class VehicleService implements VehicleServiceInterface {
     return this.fileService.getById(fileId);
   }
 
-  public findById(id: string): Promise<VehicleInterface> {
+  findById(id: string): Promise<VehicleInterface> {
     return this.vehicleRepository.findById(id);
   }
 
-  public findAllByUserId(userId: string): Promise<VehicleInterface[]> {
+  findAllByUserId(userId: string): Promise<VehicleInterface[]> {
     return this.vehicleRepository.findAllByUserId(userId);
   }
 }

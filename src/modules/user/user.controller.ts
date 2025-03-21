@@ -22,17 +22,17 @@ export class UserController {
 
   @UseGuards(AuthGuard)
   @Post()
-  public create(@Body() dto: CreateUserDTO): Promise<UserInterface> {
+  create(@Body() dto: CreateUserDTO): Promise<UserInterface> {
     return this.userService.create(dto);
   }
 
   @Get()
-  public findAll(): Promise<UserInterface[]> {
+  findAll(): Promise<UserInterface[]> {
     return this.userService.findAll();
   }
 
   @Get('/:id')
-  public findById(@Param('id') id: string): Promise<UserInterface> {
+  findById(@Param('id') id: string): Promise<UserInterface> {
     return this.userService.findById(id);
   }
 }

@@ -19,9 +19,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
     private readonly userService: UserServiceInterface,
   ) {}
 
-  public async create(
-    dto: CreateLogistDetailsDTO,
-  ): Promise<LogistDetailsInterface> {
+  async create(dto: CreateLogistDetailsDTO): Promise<LogistDetailsInterface> {
     const { userId, description, email, phoneNumber } = dto;
 
     const user = await this.userService.findById(userId);
@@ -42,9 +40,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
     return this.logistDetailsRepository.create(logistDetails);
   }
 
-  public async update(
-    dto: UpdateLogistDetailsDTO,
-  ): Promise<LogistDetailsInterface> {
+  async update(dto: UpdateLogistDetailsDTO): Promise<LogistDetailsInterface> {
     const { id, description, email, phoneNumber } = dto;
 
     const logistDetails = await this.logistDetailsRepository.findById(id);
@@ -60,7 +56,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
     return this.logistDetailsRepository.update(logistDetails);
   }
 
-  public async findById(id: string): Promise<LogistDetailsInterface> {
+  async findById(id: string): Promise<LogistDetailsInterface> {
     const logistDetails = await this.logistDetailsRepository.findById(id);
 
     if (!logistDetails) throw new NotFoundException();
@@ -68,7 +64,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
     return logistDetails;
   }
 
-  public async findByUserId(userId: string): Promise<LogistDetailsInterface> {
+  async findByUserId(userId: string): Promise<LogistDetailsInterface> {
     const logistDetails =
       await this.logistDetailsRepository.findByUserId(userId);
 
