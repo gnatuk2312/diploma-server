@@ -44,3 +44,11 @@ import { AddressModule } from './modules/address/address.module';
   ],
 })
 export class AppModule {}
+
+// TODO: add createdAt and updatedAt columns for vacancy entity
+// TODO: add createdAt and updatedAt columns for offer entity
+// TODO: create get new vacancies
+// TODO: create get applied vacancies
+// TODO: create get created vacancies
+// TODO: create get in progress vacancies
+// TODO: create get completed vacancies
