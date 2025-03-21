@@ -3,6 +3,8 @@ import { VacancyInterface } from 'src/modules/vacancy/interface/vacancy.interfac
 
 export interface OfferInterface {
   id: string;
+  createdAt: Date;
+  updatedAt: Date;
   vacancy: VacancyInterface;
   creator: UserInterface;
   comment: string | null;

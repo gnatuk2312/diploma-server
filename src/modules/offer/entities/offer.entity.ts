@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { UserInterface } from 'src/modules/user/interface/user.interface';
 import { VacancyInterface } from 'src/modules/vacancy/interface/vacancy.interface';
@@ -10,6 +17,12 @@ import { User } from 'src/modules/user/entities/user.entity';
 export class Offer implements OfferInterface {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date;
 
   @Column({ nullable: true })
   comment: string | null;
