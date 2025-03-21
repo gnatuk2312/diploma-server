@@ -7,9 +7,10 @@ import { TRAILER_REPOSITORY, TRAILER_SERVICE } from './trailer.constants';
 import { TrailerRepository } from './trailer.repository';
 import { TrailerService } from './trailer.service';
 import { TrailerController } from './trailer.controller';
+import { FileModule } from '../file/file.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Trailer]), VehicleModule],
+  imports: [TypeOrmModule.forFeature([Trailer]), VehicleModule, FileModule],
   providers: [
     {
       provide: TRAILER_REPOSITORY,

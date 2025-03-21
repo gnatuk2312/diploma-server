@@ -20,12 +20,16 @@ export class TrailerRepository implements TrailerRepositoryInterface {
   }
 
   getById(id: string): Promise<TrailerInterface> {
-    return this.trailerRepository.findOne({ where: { id } });
+    return this.trailerRepository.findOne({
+      where: { id },
+      relations: ['vehicle', 'registration'],
+    });
   }
 
   getByVehicleId(vehicleId: string): Promise<TrailerInterface> {
     return this.trailerRepository.findOne({
       where: { vehicle: { id: vehicleId } },
+      relations: ['vehicle', 'registration'],
     });
   }
 }

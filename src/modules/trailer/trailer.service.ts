@@ -9,6 +9,9 @@ import { TrailerInterface } from './interface/trailer.interface';
 import { VEHICLE_SERVICE } from '../vehicle/vehicle.constants';
 import { VehicleServiceInterface } from '../vehicle/interface/vehicle-service.interface';
 import { Trailer } from './entities/trailer.entity';
+import { FILE_SERVICE } from '../file/file.constants';
+import { FileServiceInterface } from '../file/interface/file-service.interface';
+import { FileInterface } from '../file/interface/file.interface';
 
 export class TrailerService implements TrailerServiceInterface {
   constructor(
@@ -16,10 +19,20 @@ export class TrailerService implements TrailerServiceInterface {
     private readonly trailerRepository: TrailerRepositoryInterface,
     @Inject(VEHICLE_SERVICE)
     private readonly vehicleService: VehicleServiceInterface,
+    @Inject(FILE_SERVICE)
+    private readonly fileService: FileServiceInterface,
   ) {}
 
   async create(dto: CreateTrailerDTO): Promise<TrailerInterface> {
-    const { vehicleId, height, width, length, weight, loadCapacity } = dto;
+    const {
+      vehicleId,
+      registrationFileId,
+      height,
+      width,
+      length,
+      weight,
+      loadCapacity,
+    } = dto;
 
     const vehicle = await this.vehicleService.findById(vehicleId);
 
@@ -40,12 +53,22 @@ export class TrailerService implements TrailerServiceInterface {
     trailer.weight = weight;
     trailer.loadCapacity = loadCapacity;
     trailer.vehicle = vehicle;
+    trailer.registration =
+      await this.getRegistrationByFileId(registrationFileId);
 
     return this.trailerRepository.create(trailer);
   }
 
   async update(dto: UpdateTrailerDTO): Promise<TrailerInterface> {
-    const { id, height, width, length, weight, loadCapacity } = dto;
+    const {
+      id,
+      registrationFileId,
+      height,
+      width,
+      length,
+      weight,
+      loadCapacity,
+    } = dto;
 
     const trailer = await this.trailerRepository.getById(id);
 
@@ -56,8 +79,17 @@ export class TrailerService implements TrailerServiceInterface {
     trailer.length = length;
     trailer.weight = weight;
     trailer.loadCapacity = loadCapacity;
+    trailer.registration =
+      await this.getRegistrationByFileId(registrationFileId);
 
     return this.trailerRepository.update(trailer);
+  }
+
+  private getRegistrationByFileId(
+    fileId: string | undefined,
+  ): Promise<FileInterface> | null {
+    if (!fileId) return null;
+    return this.fileService.getById(fileId);
   }
 
   getById(id: string): Promise<TrailerInterface> {

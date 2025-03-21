@@ -5,6 +5,10 @@ export class UpdateTrailerDTO {
   id: string;
 
   @IsOptional()
+  @IsUUID('4')
+  registrationFileId: string;
+
+  @IsOptional()
   @IsInt()
   height: number;
 

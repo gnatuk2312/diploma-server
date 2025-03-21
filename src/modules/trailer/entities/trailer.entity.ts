@@ -9,6 +9,8 @@ import {
 import { VehicleInterface } from 'src/modules/vehicle/interface/vehicle.interface';
 import { TrailerInterface } from '../interface/trailer.interface';
 import { Vehicle } from 'src/modules/vehicle/entities/vehicle.entity';
+import { File } from 'src/modules/file/entities/file.entity';
+import { FileInterface } from 'src/modules/file/interface/file.interface';
 
 @Entity('trailers')
 export class Trailer implements TrailerInterface {
@@ -33,4 +35,8 @@ export class Trailer implements TrailerInterface {
   @OneToOne(() => Vehicle)
   @JoinColumn()
   vehicle: VehicleInterface;
+
+  @OneToOne(() => File)
+  @JoinColumn()
+  registration: FileInterface;
 }
