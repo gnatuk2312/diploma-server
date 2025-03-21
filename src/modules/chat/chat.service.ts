@@ -53,7 +53,7 @@ export class ChatService implements ChatServiceInterface {
         chatParticipant.chat = chat;
         chatParticipant.user = user;
 
-        return await this.chatRepository.createParticipant(chatParticipant);
+        return this.chatRepository.createParticipant(chatParticipant);
       }),
     );
   }

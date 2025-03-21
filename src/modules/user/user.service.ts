@@ -35,11 +35,11 @@ export class UserService implements UserServiceInterface {
     user.password = await hash(password, this.hashSalt);
     user.role = role;
 
-    return await this.userRepository.create(user);
+    return this.userRepository.create(user);
   }
 
-  public async findAll(): Promise<UserInterface[]> {
-    return await this.userRepository.findAll();
+  public findAll(): Promise<UserInterface[]> {
+    return this.userRepository.findAll();
   }
 
   public async findById(id: string): Promise<UserInterface> {
@@ -50,7 +50,7 @@ export class UserService implements UserServiceInterface {
     return user;
   }
 
-  public async findByUsername(username: string): Promise<UserInterface> {
-    return await this.userRepository.findByUsername(username);
+  public findByUsername(username: string): Promise<UserInterface> {
+    return this.userRepository.findByUsername(username);
   }
 }

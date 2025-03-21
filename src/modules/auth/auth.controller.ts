@@ -14,19 +14,17 @@ export class AuthController {
   ) {}
 
   @Post('/sign-up')
-  public async signUp(@Body() dto: SignUpDTO): Promise<AuthInterface> {
+  public signUp(@Body() dto: SignUpDTO): Promise<AuthInterface> {
     return this.authService.signUp(dto);
   }
 
   @Post('/sign-in')
-  public async signIn(@Body() dto: SignInDTO): Promise<AuthInterface> {
+  public signIn(@Body() dto: SignInDTO): Promise<AuthInterface> {
     return this.authService.signIn(dto);
   }
 
   @Post('/refresh-token')
-  public async refreshToken(
-    @Body() dto: RefreshTokenDTO,
-  ): Promise<AuthInterface> {
+  public refreshToken(@Body() dto: RefreshTokenDTO): Promise<AuthInterface> {
     return this.authService.refreshToken(dto);
   }
 }

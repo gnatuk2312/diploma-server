@@ -10,19 +10,19 @@ export class UserRepository implements UserRepositoryInterface {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  public async create(entity: UserInterface): Promise<UserInterface> {
-    return await this.userRepository.save(entity);
+  public create(entity: UserInterface): Promise<UserInterface> {
+    return this.userRepository.save(entity);
   }
 
-  public async findAll(): Promise<UserInterface[]> {
-    return await this.userRepository.find();
+  public findAll(): Promise<UserInterface[]> {
+    return this.userRepository.find();
   }
 
-  public async findById(id: string): Promise<UserInterface> {
-    return await this.userRepository.findOne({ where: { id } });
+  public findById(id: string): Promise<UserInterface> {
+    return this.userRepository.findOne({ where: { id } });
   }
 
-  public async findByUsername(username: string): Promise<UserInterface> {
-    return await this.userRepository.findOne({ where: { username } });
+  public findByUsername(username: string): Promise<UserInterface> {
+    return this.userRepository.findOne({ where: { username } });
   }
 }

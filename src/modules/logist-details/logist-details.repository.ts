@@ -13,24 +13,24 @@ export class LogistDetailsRepository
     private readonly logistDetailsRepository: Repository<LogistDetails>,
   ) {}
 
-  public async create(
+  public create(
     entity: LogistDetailsInterface,
   ): Promise<LogistDetailsInterface> {
-    return await this.logistDetailsRepository.save(entity);
+    return this.logistDetailsRepository.save(entity);
   }
 
-  public async update(
+  public update(
     entity: LogistDetailsInterface,
   ): Promise<LogistDetailsInterface> {
-    return await this.logistDetailsRepository.save(entity);
+    return this.logistDetailsRepository.save(entity);
   }
 
-  public async findById(id: string): Promise<LogistDetailsInterface> {
-    return await this.logistDetailsRepository.findOne({ where: { id } });
+  public findById(id: string): Promise<LogistDetailsInterface> {
+    return this.logistDetailsRepository.findOne({ where: { id } });
   }
 
-  public async findByUserId(userId: string): Promise<LogistDetailsInterface> {
-    return await this.logistDetailsRepository.findOne({
+  public findByUserId(userId: string): Promise<LogistDetailsInterface> {
+    return this.logistDetailsRepository.findOne({
       where: { user: { id: userId } },
     });
   }

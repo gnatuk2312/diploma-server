@@ -39,7 +39,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
     logistDetails.email = email;
     logistDetails.phoneNumber = phoneNumber;
 
-    return await this.logistDetailsRepository.create(logistDetails);
+    return this.logistDetailsRepository.create(logistDetails);
   }
 
   public async update(
@@ -57,7 +57,7 @@ export class LogistDetailsService implements LogistDetailsServiceInterface {
     logistDetails.email = email;
     logistDetails.phoneNumber = phoneNumber;
 
-    return await this.logistDetailsRepository.update(logistDetails);
+    return this.logistDetailsRepository.update(logistDetails);
   }
 
   public async findById(id: string): Promise<LogistDetailsInterface> {
