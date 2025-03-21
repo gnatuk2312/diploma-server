@@ -1,10 +1,12 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { VacancyStatus } from '../vacancy.enums';
@@ -18,6 +20,12 @@ import { Address } from 'src/modules/address/entities/address.entity';
 export class Vacancy implements VacancyInterface {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date;
 
   @Column({ type: 'enum', enum: VacancyStatus })
   status: VacancyStatus;

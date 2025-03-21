@@ -4,6 +4,8 @@ import { AddressInterface } from 'src/modules/address/interface/address.interfac
 
 export interface VacancyInterface {
   id: string;
+  createdAt: Date;
+  updatedAt: Date;
   creator: UserInterface;
   status: VacancyStatus;
   title: string;
