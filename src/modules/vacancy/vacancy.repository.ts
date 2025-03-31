@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Not, Repository } from 'typeorm';
+import { DeleteResult, IsNull, Not, Repository } from 'typeorm';
 
 import { VacancyRepositoryInterface } from './interface/vacancy-repository.interface';
 import { VacancyInterface } from './interface/vacancy.interface';
@@ -56,6 +56,7 @@ export class VacancyRepository implements VacancyRepositoryInterface {
   ): Promise<VacancyInterface[]> {
     return this.vacancyRepository.find({
       where: { creator: { id: userId }, status },
+      relations: ['from', 'to'],
     });
   }
 }

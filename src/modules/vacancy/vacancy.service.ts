@@ -12,6 +12,7 @@ import { Vacancy } from './entities/vacancy.entity';
 import { VacancyStatus } from './vacancy.enums';
 import { ADDRESS_SERVICE } from '../address/address.constants';
 import { AddressServiceInterface } from '../address/interface/address-service.interface';
+import { UpdateVacancyDTO } from './dto/update-vacancy.dto';
 
 export class VacancyService implements VacancyServiceInterface {
   constructor(
@@ -49,6 +50,22 @@ export class VacancyService implements VacancyServiceInterface {
     vacancy.to = await this.addressService.create(to);
 
     return this.vacancyRepository.create(vacancy);
+  }
+
+  async update(dto: UpdateVacancyDTO): Promise<VacancyInterface> {
+    const { id, title, description, unitPrice, from, to } = dto;
+
+    const vacancy = await this.vacancyRepository.getById(id);
+
+    if (!vacancy) throw new NotFoundException();
+
+    vacancy.title = title;
+    vacancy.description = description;
+    vacancy.unitPrice = unitPrice;
+    vacancy.from = await this.addressService.create(from);
+    vacancy.to = await this.addressService.create(to);
+
+    return this.vacancyRepository.update(vacancy);
   }
 
   getById(id: string): Promise<VacancyInterface> {

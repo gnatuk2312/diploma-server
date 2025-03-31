@@ -6,12 +6,14 @@ import {
   Param,
   Patch,
   Post,
+  Put,
 } from '@nestjs/common';
 
 import { VACANCY_SERVICE } from './vacancy.constants';
 import { VacancyServiceInterface } from './interface/vacancy-service.interface';
 import { CreateVacancyDTO } from './dto/create-vacancy.dto';
 import { VacancyInterface } from './interface/vacancy.interface';
+import { UpdateVacancyDTO } from './dto/update-vacancy.dto';
 
 @Controller('vacancies')
 export class VacancyController {
@@ -23,6 +25,11 @@ export class VacancyController {
   @Post()
   create(@Body() dto: CreateVacancyDTO): Promise<VacancyInterface> {
     return this.vacancyService.create(dto);
+  }
+
+  @Put()
+  update(@Body() dto: UpdateVacancyDTO): Promise<VacancyInterface> {
+    return this.vacancyService.update(dto);
   }
 
   @Get(':id')

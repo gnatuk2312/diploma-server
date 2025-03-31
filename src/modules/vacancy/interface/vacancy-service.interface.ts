@@ -1,8 +1,10 @@
 import { CreateVacancyDTO } from '../dto/create-vacancy.dto';
+import { UpdateVacancyDTO } from '../dto/update-vacancy.dto';
 import { VacancyInterface } from './vacancy.interface';
 
 export interface VacancyServiceInterface {
   create(dto: CreateVacancyDTO): Promise<VacancyInterface>;
+  update(dto: UpdateVacancyDTO): Promise<VacancyInterface>;
   getById(id: string): Promise<VacancyInterface>;
   getAll(): Promise<VacancyInterface[]>;
   markAsInProgress(id: string): Promise<VacancyInterface>;
