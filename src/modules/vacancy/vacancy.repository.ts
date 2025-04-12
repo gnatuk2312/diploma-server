@@ -32,7 +32,10 @@ export class VacancyRepository implements VacancyRepositoryInterface {
   }
 
   getByStatus(status: VacancyStatus): Promise<VacancyInterface[]> {
-    return this.vacancyRepository.find({ where: { status } });
+    return this.vacancyRepository.find({
+      where: { status },
+      relations: ['creator', 'from', 'to'],
+    });
   }
 
   getForDriver(
