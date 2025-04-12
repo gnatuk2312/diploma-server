@@ -50,6 +50,7 @@ export class VacancyRepository implements VacancyRepositoryInterface {
         },
         status,
       },
+      relations: ['creator', 'from', 'to'],
     });
   }
 
