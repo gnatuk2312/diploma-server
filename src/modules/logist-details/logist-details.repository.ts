@@ -28,6 +28,7 @@ export class LogistDetailsRepository
   getByUserId(userId: string): Promise<LogistDetailsInterface> {
     return this.logistDetailsRepository.findOne({
       where: { user: { id: userId } },
+      relations: ['user'],
     });
   }
 }

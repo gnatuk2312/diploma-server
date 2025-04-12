@@ -31,7 +31,7 @@ export class DriverDetailsRepository
   getByUserId(userId: string): Promise<DriverDetailsInterface> {
     return this.driverDetailsRepository.findOne({
       where: { user: { id: userId } },
-      relations: ['driverLicense'],
+      relations: ['user', 'driverLicense'],
     });
   }
 }
